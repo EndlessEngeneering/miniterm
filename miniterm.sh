@@ -100,8 +100,9 @@ main() {
     read -p "Choice: " LOGNUM
 
     if [ "$LOGNUM" -eq 1 ]; then
-        # If login returns 0 (success), open up the main app selection menu
-        if login_user; then
+        # Run login. If it succeeds, loop the menu forever until they select "Exit"
+        login_user
+        if [ $? -eq 0 ]; then
             while true; do
                 show_app_menu
             done
@@ -114,6 +115,7 @@ main() {
         main
     fi
 }
+
 
 # Run the program
 main
